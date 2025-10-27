@@ -1,87 +1,147 @@
 # Histoire Interactive - Jeu Narratif Minimaliste
 
+Un jeu narratif en 2D noir et blanc qui raconte l'histoire d'un débat écologique sur les livres papier vs Kindle, ponctué de 4 photos personnelles.
+
 ## 📁 Structure du Projet
 
 ```
 jsgametest/
 ├── index.html              # Point d'entrée HTML
-├── style.css               # Styles CSS
-├── back.jpg                # Image de fond (existante)
-├── images/                 # Dossier pour vos images d'histoire
-│   └── (placez vos images ici)
+├── style.css               # Styles CSS minimalistes
+├── images/                 # Photos personnelles (4 requis)
+│   ├── photo1.jpg         # Pile de livres
+│   ├── photo2.jpg         # Kindle allumé
+│   ├── photo3.jpg         # Déchets électroniques
+│   └── photo4.jpg         # Livre + Kindle ensemble
 ├── js/                     # Modules JavaScript
 │   ├── main.js            # Point d'entrée principal
 │   ├── config.js          # Configuration du jeu
-│   ├── character.js       # Logique du personnage
+│   ├── character.js       # Logique du personnage avec émotions
 │   ├── camera.js          # Gestion de la caméra
-│   ├── storyData.js       # Données des histoires
+│   ├── storyData.js       # 8 points d'histoire
 │   ├── storyManager.js    # Gestion des points d'histoire
 │   ├── renderer.js        # Rendu graphique
-│   └── input.js           # Gestion des entrées
+│   ├── input.js           # Gestion des entrées
+│   └── decorations.js     # Décorations contextuelles + photos
 └── README.md              # Ce fichier
 ```
 
+## 📸 Photos Requises
+
+Le jeu nécessite **4 photos personnelles** à placer dans `images/` :
+
+### Photo 1 (`photo1.jpg`) - Zone des Livres Papier (position ~3000px)
+- **Sujet** : Pile de 3-4 livres
+- **Angle** : Vue de dessus à 45° (plongée)
+- **Éclairage** : Lumière naturelle
+- **Format** : Horizontal (400x300px recommandé)
+- **Apparaît** : Chapitre 3 - "Les livres papier"
+
+### Photo 2 (`photo2.jpg`) - Zone Kindle (position ~4300px)
+- **Sujet** : Kindle avec écran allumé
+- **Angle** : 3/4 (légèrement de côté)
+- **Éclairage** : Lumière douce pour voir l'écran
+- **Format** : Horizontal ou carré (400x300px)
+- **Apparaît** : Chapitre 4 - "La liseuse électronique"
+
+### Photo 3 (`photo3.jpg`) - Zone Déchets (position ~5400px)
+- **Sujet** : Vieux appareils électroniques cassés
+- **Angle** : Vue de dessus (plongée)
+- **Éclairage** : Contraste élevé pour souligner l'aspect "déchet"
+- **Format** : Horizontal (400x300px)
+- **Apparaît** : Chapitre 5 - "Les déchets électroniques"
+
+### Photo 4 (`photo4.jpg`) - Zone Conclusion (position ~8900px)
+- **Sujet** : Main tenant un livre papier ET une Kindle côte à côte
+- **Angle** : Vue frontale
+- **Éclairage** : Équilibré sur les deux objets
+- **Format** : Horizontal (400x300px)
+- **Apparaît** : Chapitre 8 - "La conclusion harmonieuse"
+
+> **Note** : Si une photo n'est pas trouvée, un placeholder avec bordure en pointillés s'affiche automatiquement.
+
 ## 🎮 Fonctionnalités
 
-- ✅ Personnage en bâton **avec visage** (yeux et sourire)
-- ✅ **Plus grand** et mieux animé
-- ✅ Architecture modulaire et extensible
-- ✅ Points d'histoire (texte et images)
-- ✅ Caméra qui suit le personnage
-- ✅ Mode automatique et manuel
+- ✅ Personnage en bâton avec **7 expressions faciales**
+- ✅ Émotions qui changent selon l'histoire (curieux, neutre, pensif, inquiet, surpris, contemplatif, sage)
+- ✅ Clignement automatique des yeux toutes les 3 secondes
+- ✅ Architecture modulaire ES6
+- ✅ 8 points d'histoire espacés de 1200px
+- ✅ Caméra qui suit le personnage en douceur
+- ✅ Décorations contextuelles (arbres, pluie, livres, Kindle, poubelles, etc.)
+- ✅ **4 photos personnelles** intégrées dans le récit
+- ✅ Mode auto-walk et contrôle manuel (flèches)
 
-## 📝 Comment Ajouter du Contenu
+## 📝 Structure de l'Histoire
 
-### Ajouter une Histoire (Texte)
+Le jeu comporte **8 chapitres** répartis sur 10 200 pixels :
 
-Éditez `js/storyData.js` :
-
-```javascript
-{
-  position: 7200,  // Position dans le monde
-  type: 'text',
-  title: 'Nouveau Chapitre',
-  content: 'Votre texte ici...'
-}
-```
-
-### Ajouter une Image
-
-1. Placez votre image dans le dossier `images/`
-2. Éditez `js/storyData.js` :
-
-```javascript
-{
-  position: 3000,
-  type: 'image',
-  title: 'Mon Image',
-  imageSrc: 'images/mon-image.jpg',
-  content: 'Description optionnelle'
-}
-```
+1. **0-1200px** : Introduction - Achat de la Kindle (émotion: curieux)
+2. **1200-2400px** : Question écologique (émotion: neutral)
+3. **2400-3600px** : Les livres papier → **PHOTO 1**
+4. **3600-4800px** : La liseuse électronique → **PHOTO 2**
+5. **4800-6000px** : Les déchets électroniques → **PHOTO 3**
+6. **6000-7200px** : Le point de bascule (nombres: 25, 50, 10 livres)
+7. **7200-8400px** : La nuance (mix livres + Kindles)
+8. **8400-9600px** : La conclusion → **PHOTO 4**
 
 ## ⚙️ Configuration
 
 Éditez `js/config.js` pour modifier :
 
-- `characterSpeed` : Vitesse du personnage
-- `storyInterval` : Distance entre les histoires
-- `worldLength` : Longueur totale du monde
+```javascript
+export const CONFIG = {
+  characterSpeed: 3,      // Vitesse du personnage
+  storyInterval: 1200,    // Distance entre chapitres
+  worldLength: 10200      // Longueur totale du monde
+};
+```
 
 ## 🚀 Lancer le Jeu
 
-Ouvrez simplement `index.html` dans votre navigateur !
+1. Ajoutez vos 4 photos dans le dossier `images/`
+2. Ouvrez `index.html` dans un navigateur moderne
+3. Utilisez les **flèches** ou le bouton **Auto-Walk** pour avancer
 
-## 🎨 Personnalisation
+## 🎨 Style Minimaliste
 
-### Modifier le Personnage
+- **Couleurs** : Noir et blanc uniquement
+- **Police** : Courier New (monospace)
+- **Esthétique** : Bâton, sans bordures arrondies
+- **Arrière-plan** : Blanc pur (#ffffff)
 
-Éditez `js/character.js` - méthode `draw()`
+## 🛠️ Développement
 
-### Modifier l'Arrière-plan
+### Modifier les Émotions du Personnage
 
-Éditez `js/renderer.js` - méthode `drawBackground()`
+Éditez `js/character.js` - méthode `drawFace(emotion)` :
 
-### Ajouter des Éléments Visuels
+```javascript
+case 'happy':
+  // Dessiner expression heureuse
+  break;
+```
 
-Créez une nouvelle classe dans `js/` et importez-la dans `main.js`
+### Ajouter des Décorations
+
+Éditez `js/decorations.js` - méthode `draw()` :
+
+```javascript
+if (characterX > 5000 && characterX < 6000) {
+  this.drawCustomDecoration(ctx, x, y);
+}
+```
+
+### Modifier l'Histoire
+
+Éditez `js/storyData.js` :
+
+```javascript
+export const STORY_POINTS = [
+  { 
+    position: 1200, 
+    text: "Nouveau chapitre", 
+    emotion: "surprised" 
+  }
+];
+```

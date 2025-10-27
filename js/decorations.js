@@ -4,6 +4,22 @@ export class DecorationManager {
     this.canvas = canvas;
     this.raindrops = [];
     this.initRain();
+    
+    // Charger les 4 photos personnelles
+    this.photos = [];
+    this.photoStates = [false, false, false, false]; // État de chargement
+    
+    for (let i = 1; i <= 4; i++) {
+      const img = new Image();
+      img.src = `images/photo${i}.jpg`;
+      img.onload = () => {
+        this.photoStates[i - 1] = true;
+      };
+      img.onerror = () => {
+        console.log(`Photo ${i} not found - showing placeholder`);
+      };
+      this.photos.push(img);
+    }
   }
 
   initRain() {
@@ -343,6 +359,44 @@ export class DecorationManager {
     ctx.restore();
   }
 
+  drawPhoto(ctx, img, x, y, width, height, loaded, description) {
+    ctx.save();
+    
+    if (loaded) {
+      // Dessiner la photo réelle
+      ctx.drawImage(img, x - width / 2, y - height / 2, width, height);
+      
+      // Cadre fin autour de la photo
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(x - width / 2, y - height / 2, width, height);
+    } else {
+      // Placeholder avec bordure en pointillés
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x - width / 2, y - height / 2, width, height);
+      
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([10, 10]);
+      ctx.strokeRect(x - width / 2, y - height / 2, width, height);
+      ctx.setLineDash([]);
+      
+      // Texte du placeholder
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+      ctx.font = '16px Courier New';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('Photo placeholder', x, y - 10);
+      
+      if (description) {
+        ctx.font = '12px Courier New';
+        ctx.fillText(description, x, y + 10);
+      }
+    }
+    
+    ctx.restore();
+  }
+
   draw(ctx, cameraX, characterX, canvasHeight) {
     // Zone 1 (0-1200): Début - Kindle
     if (characterX < 1800) {
@@ -362,10 +416,19 @@ export class DecorationManager {
 
     // Zone 3 (2400-3600): Livre papier - UN seul livre ouvert
     if (characterX > 1800 && characterX < 4200) {
-      // Un seul livre ouvert
-      const bookX = 3000 - cameraX;
-      if (bookX > -100 && bookX < this.canvas.width + 100) {
-        this.drawBook(ctx, bookX, canvasHeight / 2, true);
+      // Photo 1: Pile de livres vue de dessus à 45°
+      const photo1X = 3000 - cameraX;
+      if (photo1X > -250 && photo1X < this.canvas.width + 250) {
+        this.drawPhoto(
+          ctx,
+          this.photos[0],
+          photo1X,
+          canvasHeight / 2,
+          400,
+          300,
+          this.photoStates[0],
+          'Stack of books'
+        );
       }
 
       // Arbres en arrière-plan
@@ -378,15 +441,41 @@ export class DecorationManager {
 
     // Zone 4 (3600-4800): Liseuse - UNE seule Kindle
     if (characterX > 3000 && characterX < 5400) {
-      const kX = 4300 - cameraX;
-      if (kX > -100 && kX < this.canvas.width + 100) {
-        this.drawKindle(ctx, kX, canvasHeight / 2 + 20);
+      // Photo 2: Kindle écran allumé 3/4
+      const photo2X = 4300 - cameraX;
+      if (photo2X > -250 && photo2X < this.canvas.width + 250) {
+        this.drawPhoto(
+          ctx,
+          this.photos[1],
+          photo2X,
+          canvasHeight / 2,
+          400,
+          300,
+          this.photoStates[1],
+          'Kindle e-reader'
+        );
       }
     }
 
     // Zone 5 (4800-6000): Déchets - poubelles
     if (characterX > 4200 && characterX < 6600) {
-      const trashes = [5100, 5400, 5700];
+      // Photo 3: Vieux appareils électroniques cassés
+      const photo3X = 5400 - cameraX;
+      if (photo3X > -250 && photo3X < this.canvas.width + 250) {
+        this.drawPhoto(
+          ctx,
+          this.photos[2],
+          photo3X,
+          canvasHeight / 2,
+          400,
+          300,
+          this.photoStates[2],
+          'E-waste'
+        );
+      }
+      
+      // Poubelles autour de la photo
+      const trashes = [5100, 5700];
       trashes.forEach((pos) => {
         const tX = pos - cameraX;
         if (tX > -100 && tX < this.canvas.width + 100) {
@@ -434,7 +523,23 @@ export class DecorationManager {
 
     // Zone 8 (8400-9600): Conclusion - checkmarks
     if (characterX > 7800) {
-      const checks = [8800, 9100];
+      // Photo 4: Main tenant livre ET Kindle côte à côte
+      const photo4X = 8900 - cameraX;
+      if (photo4X > -250 && photo4X < this.canvas.width + 250) {
+        this.drawPhoto(
+          ctx,
+          this.photos[3],
+          photo4X,
+          canvasHeight / 2,
+          400,
+          300,
+          this.photoStates[3],
+          'Book & Kindle together'
+        );
+      }
+      
+      // Checkmarks autour de la photo
+      const checks = [8600, 9200];
       checks.forEach((pos) => {
         const cX = pos - cameraX;
         if (cX > -100 && cX < this.canvas.width + 100) {
