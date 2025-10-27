@@ -5,7 +5,7 @@ export const storyPoints = [
     type: 'text',
     title: 'Le Début',
     content:
-      "Étant un grand fan de lecture, je me suis récemment procuré une Kindle. Un choix pratique pour transporter toute ma bibliothèque partout avec moi.",
+      'Étant un grand fan de lecture, je me suis récemment procuré une Kindle. Un choix pratique pour transporter toute ma bibliothèque partout avec moi.',
   },
   {
     position: 2400,
@@ -40,7 +40,7 @@ export const storyPoints = [
     type: 'text',
     title: 'Le Point de Bascule',
     content:
-      "Il faudrait lire entre 25 et 50 livres sur la même liseuse pour que son impact carbone soit inférieur aux livres papier. En moyenne, un Français lit 5 livres par an. Il faudrait donc garder sa liseuse 10 ans.",
+      'Il faudrait lire entre 25 et 50 livres sur la même liseuse pour que son impact carbone soit inférieur aux livres papier. En moyenne, un Français lit 5 livres par an. Il faudrait donc garder sa liseuse 10 ans.',
   },
   {
     position: 8400,
