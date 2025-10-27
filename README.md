@@ -31,6 +31,7 @@ jsgametest/
 Le jeu nécessite **4 photos personnelles** à placer dans `images/` :
 
 ### Photo 1 (`photo1.jpg`) - Zone des Livres Papier (position ~3000px)
+
 - **Sujet** : Pile de 3-4 livres
 - **Angle** : Vue de dessus à 45° (plongée)
 - **Éclairage** : Lumière naturelle
@@ -38,6 +39,7 @@ Le jeu nécessite **4 photos personnelles** à placer dans `images/` :
 - **Apparaît** : Chapitre 3 - "Les livres papier"
 
 ### Photo 2 (`photo2.jpg`) - Zone Kindle (position ~4300px)
+
 - **Sujet** : Kindle avec écran allumé
 - **Angle** : 3/4 (légèrement de côté)
 - **Éclairage** : Lumière douce pour voir l'écran
@@ -45,6 +47,7 @@ Le jeu nécessite **4 photos personnelles** à placer dans `images/` :
 - **Apparaît** : Chapitre 4 - "La liseuse électronique"
 
 ### Photo 3 (`photo3.jpg`) - Zone Déchets (position ~5400px)
+
 - **Sujet** : Vieux appareils électroniques cassés
 - **Angle** : Vue de dessus (plongée)
 - **Éclairage** : Contraste élevé pour souligner l'aspect "déchet"
@@ -52,6 +55,7 @@ Le jeu nécessite **4 photos personnelles** à placer dans `images/` :
 - **Apparaît** : Chapitre 5 - "Les déchets électroniques"
 
 ### Photo 4 (`photo4.jpg`) - Zone Conclusion (position ~8900px)
+
 - **Sujet** : Main tenant un livre papier ET une Kindle côte à côte
 - **Angle** : Vue frontale
 - **Éclairage** : Équilibré sur les deux objets
@@ -91,9 +95,9 @@ Le jeu comporte **8 chapitres** répartis sur 10 200 pixels :
 
 ```javascript
 export const CONFIG = {
-  characterSpeed: 3,      // Vitesse du personnage
-  storyInterval: 1200,    // Distance entre chapitres
-  worldLength: 10200      // Longueur totale du monde
+  characterSpeed: 3, // Vitesse du personnage
+  storyInterval: 1200, // Distance entre chapitres
+  worldLength: 10200, // Longueur totale du monde
 };
 ```
 
@@ -138,10 +142,10 @@ if (characterX > 5000 && characterX < 6000) {
 
 ```javascript
 export const STORY_POINTS = [
-  { 
-    position: 1200, 
-    text: "Nouveau chapitre", 
-    emotion: "surprised" 
-  }
+  {
+    position: 1200,
+    text: 'Nouveau chapitre',
+    emotion: 'surprised',
+  },
 ];
 ```

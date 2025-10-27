@@ -56,10 +56,10 @@ export class StoryManager {
 
     this.storyOverlay.classList.add('visible');
 
-    // Cacher après 4 secondes
+    // Cacher après 6,5 secondes pour avoir le temps de lire
     setTimeout(() => {
       this.storyOverlay.classList.remove('visible');
-    }, 4000);
+    }, 6500);
   }
 
   drawMarkers(ctx, cameraX, canvasHeight) {

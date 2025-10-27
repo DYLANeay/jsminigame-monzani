@@ -4,11 +4,11 @@ export class DecorationManager {
     this.canvas = canvas;
     this.raindrops = [];
     this.initRain();
-    
+
     // Charger les 4 photos personnelles
     this.photos = [];
     this.photoStates = [false, false, false, false]; // État de chargement
-    
+
     for (let i = 1; i <= 4; i++) {
       const img = new Image();
       img.src = `images/photo${i}.jpg`;
@@ -361,11 +361,11 @@ export class DecorationManager {
 
   drawPhoto(ctx, img, x, y, width, height, loaded, description) {
     ctx.save();
-    
+
     if (loaded) {
       // Dessiner la photo réelle
       ctx.drawImage(img, x - width / 2, y - height / 2, width, height);
-      
+
       // Cadre fin autour de la photo
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 2;
@@ -374,26 +374,26 @@ export class DecorationManager {
       // Placeholder avec bordure en pointillés
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(x - width / 2, y - height / 2, width, height);
-      
+
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 2;
       ctx.setLineDash([10, 10]);
       ctx.strokeRect(x - width / 2, y - height / 2, width, height);
       ctx.setLineDash([]);
-      
+
       // Texte du placeholder
       ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
       ctx.font = '16px Courier New';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('Photo placeholder', x, y - 10);
-      
+
       if (description) {
         ctx.font = '12px Courier New';
         ctx.fillText(description, x, y + 10);
       }
     }
-    
+
     ctx.restore();
   }
 
@@ -473,7 +473,7 @@ export class DecorationManager {
           'E-waste'
         );
       }
-      
+
       // Poubelles autour de la photo
       const trashes = [5100, 5700];
       trashes.forEach((pos) => {
@@ -537,7 +537,7 @@ export class DecorationManager {
           'Book & Kindle together'
         );
       }
-      
+
       // Checkmarks autour de la photo
       const checks = [8600, 9200];
       checks.forEach((pos) => {

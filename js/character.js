@@ -5,7 +5,7 @@ export class Character {
     this.y = canvas.height - 180;
     this.width = 60;
     this.height = 120;
-    this.speed = 3;
+    this.speed = 2.5;
     this.isWalking = false;
     this.animationFrame = 0;
     this.animationSpeed = 0.2;
