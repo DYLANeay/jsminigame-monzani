@@ -8,16 +8,36 @@ export class DecorationManager {
     // Charger les 4 photos personnelles
     this.photos = [];
     this.photoStates = [false, false, false, false]; // État de chargement
+    this.photoCanvas = []; // Canvas pré-rendus pour chaque photo
+    
+    this.loadPhotos();
+  }
 
+  loadPhotos() {
     for (let i = 1; i <= 4; i++) {
       const img = new Image();
       img.src = `images/photo${i}.jpg`;
+      
       img.onload = () => {
+        // Créer un canvas pré-rendu pour cette image
+        const preCanvas = document.createElement('canvas');
+        preCanvas.width = 400;
+        preCanvas.height = 300;
+        const preCtx = preCanvas.getContext('2d', { alpha: false });
+        
+        // Dessiner l'image une seule fois sur ce canvas
+        preCtx.drawImage(img, 0, 0, 400, 300);
+        
+        this.photoCanvas[i - 1] = preCanvas;
         this.photoStates[i - 1] = true;
+        
+        console.log(`Photo ${i} prerendered`);
       };
+      
       img.onerror = () => {
         console.log(`Photo ${i} not found - showing placeholder`);
       };
+      
       this.photos.push(img);
     }
   }
@@ -359,12 +379,12 @@ export class DecorationManager {
     ctx.restore();
   }
 
-  drawPhoto(ctx, img, x, y, width, height, loaded, description) {
+  drawPhoto(ctx, img, x, y, width, height, loaded, description, index) {
     ctx.save();
 
-    if (loaded) {
-      // Dessiner la photo réelle
-      ctx.drawImage(img, x - width / 2, y - height / 2, width, height);
+    if (loaded && this.photoCanvas[index]) {
+      // Dessiner le canvas pré-rendu (beaucoup plus rapide)
+      ctx.drawImage(this.photoCanvas[index], x - width / 2, y - height / 2, width, height);
 
       // Cadre fin autour de la photo
       ctx.strokeStyle = '#000000';
@@ -427,7 +447,8 @@ export class DecorationManager {
           400,
           300,
           this.photoStates[0],
-          'Stack of books'
+          'Stack of books',
+          0
         );
       }
 
@@ -452,7 +473,8 @@ export class DecorationManager {
           400,
           300,
           this.photoStates[1],
-          'Kindle e-reader'
+          'Kindle e-reader',
+          1
         );
       }
     }
@@ -470,7 +492,8 @@ export class DecorationManager {
           400,
           300,
           this.photoStates[2],
-          'E-waste'
+          'E-waste',
+          2
         );
       }
 
@@ -534,7 +557,8 @@ export class DecorationManager {
           400,
           300,
           this.photoStates[3],
-          'Book & Kindle together'
+          'Book & Kindle together',
+          3
         );
       }
 
