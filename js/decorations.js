@@ -397,55 +397,6 @@ export class DecorationManager {
     ctx.restore();
   }
 
-  drawSources(ctx, x, y) {
-    ctx.save();
-    
-    // Titre
-    ctx.fillStyle = '#000000';
-    ctx.font = 'bold 16px Courier New';
-    ctx.textAlign = 'left';
-    ctx.fillText('SOURCES', x, y);
-    
-    // Ligne sous le titre
-    ctx.strokeStyle = '#000000';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(x, y + 5);
-    ctx.lineTo(x + 350, y + 5);
-    ctx.stroke();
-    
-    // Liste des sources
-    const sources = [
-      'L\'Avenir du Bon - Liseuse vs livre papier',
-      'Mavana - Impacts environnementaux',
-      'ENAP - Lecture et environnement',
-      'CIRAIG - Analyse cycle de vie',
-      'Librinova - eBook vs livre papier',
-      'Greenweez - Livre vs liseuse',
-      'Springer - Étude 2017',
-      'Springer - Étude 2011 (1)',
-      'Springer - Étude 2011 (2)'
-    ];
-    
-    ctx.font = '10px Courier New';
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-    
-    sources.forEach((source, index) => {
-      const yPos = y + 25 + (index * 15);
-      // Puce
-      ctx.fillText('•', x, yPos);
-      // Texte
-      ctx.fillText(source, x + 15, yPos);
-    });
-    
-    // Note en bas
-    ctx.font = '9px Courier New';
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-    ctx.fillText('Consultez le README pour les liens complets', x, y + 165);
-    
-    ctx.restore();
-  }
-
   draw(ctx, cameraX, characterX, canvasHeight) {
     // Zone 1 (0-1200): Début - Kindle
     if (characterX < 1800) {
@@ -595,14 +546,6 @@ export class DecorationManager {
           this.drawCheckmark(ctx, cX, canvasHeight / 2);
         }
       });
-    }
-
-    // Zone finale (9600+): Sources
-    if (characterX > 9000) {
-      const sourcesX = 9800 - cameraX;
-      if (sourcesX > -400 && sourcesX < this.canvas.width + 400) {
-        this.drawSources(ctx, sourcesX, canvasHeight / 2 - 80);
-      }
     }
   }
 }

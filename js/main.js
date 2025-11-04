@@ -35,7 +35,6 @@ class Game {
     this.setupUI();
     this.setupResize();
 
-
     this.gameLoop();
   }
 

@@ -1,4 +1,3 @@
-// Données des points d'histoire
 export const storyPoints = [
   {
     position: 1200,

@@ -9,8 +9,7 @@ export class Renderer {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  drawBackground(cameraX) {
-  }
+  drawBackground(cameraX) {}
 
   drawGround() {
     this.ctx.strokeStyle = '#000000';
@@ -35,10 +34,10 @@ export class Renderer {
   drawCredits(cameraX) {
     // Position des crédits dans le monde (après le dernier point d'histoire à 9600)
     const creditsWorldX = 9900;
-    
+
     // Position à l'écran
     const screenX = creditsWorldX - cameraX;
-    
+
     // Ne dessiner que si visible à l'écran
     if (screenX > -200 && screenX < this.canvas.width + 200) {
       this.ctx.save();

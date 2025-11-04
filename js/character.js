@@ -134,11 +134,10 @@ export class Character {
       ctx.stroke();
     }
 
-    // Jambes avec animation
     if (this.isWalking) {
       const legSwing = Math.sin(this.animationFrame) * 20;
 
-      // Jambe gauche
+      // Jambes gauche
       ctx.beginPath();
       ctx.moveTo(x, y + 70);
       ctx.lineTo(x - 10 + legSwing, y + 110);
