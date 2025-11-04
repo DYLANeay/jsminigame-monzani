@@ -32,11 +32,10 @@ class Game {
     this.inputManager = new InputManager();
     this.decorationManager = new DecorationManager(this.canvas);
 
-    // Setup events
     this.setupUI();
     this.setupResize();
 
-    // Start game loop
+
     this.gameLoop();
   }
 
@@ -95,6 +94,7 @@ class Game {
 
     // Draw UI
     this.renderer.drawProgress(this.character.x, config.worldLength);
+    this.renderer.drawCredits(this.camera.x);
   }
 
   gameLoop() {

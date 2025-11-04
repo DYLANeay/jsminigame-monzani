@@ -13,11 +13,98 @@
     </div>
 
     <div id="instructions">
-      <p>Utilisez les touches ← et → pour faire marcher le personnage</p>
-      <p>Ou cliquez sur "Auto" pour le mode automatique</p>
+      <!--       <p>Utilisez les touches ← et → pour faire marcher le personnage</p>
+ -->
+      <!--     <p>Ou cliquez sur "Auto" pour le mode automatique</p> -->
       <button id="autoBtn">Auto: OFF</button>
     </div>
 
+    <div id="sources">
+      <h3 id="sources-toggle">Sources ▼</h3>
+      <ul id="sources-list" class="hidden">
+        <li>
+          <a
+            href="https://www.laveniradubon.fr/culture-loisirs/liseuse-vs-livre-papier-qui-va-gagner-le-combat-ecologique"
+            target="_blank"
+            >L'Avenir du Bon - Liseuse vs livre papier</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://mavana.earth/liseuse-livre-papier-impacts-environnementaux/"
+            target="_blank"
+            >Mavana - Impacts environnementaux</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://bibliotheque.enap.ca/fr/lectureNouvelle.aspx?idNews=14275"
+            target="_blank"
+            >ENAP - Lecture et environnement</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://ciraig.org/index.php/fr/blogue/quelle-est-loption-la-plus-environnementale-pour-lire-un-livre/"
+            target="_blank"
+            >CIRAIG - Analyse cycle de vie</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.librinova.com/blog/produire-un-ebook-est-il-plus-ecologique-quimprimer-un-livre-papier/"
+            target="_blank"
+            >Librinova - eBook vs livre papier</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.greenweez.com/magazine/livre-vs-liseuse-que-privilegier-ecologie-et-remuneration-de-lauteur-48403/"
+            target="_blank"
+            >Greenweez - Livre vs liseuse</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://link.springer.com/article/10.1007/s11367-017-1417-5"
+            target="_blank"
+            >Springer - Étude 2017</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://link.springer.com/article/10.1007/s11367-011-0254-1"
+            target="_blank"
+            >Springer - Étude 2011 (1)</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://link.springer.com/article/10.1007/s11367-011-0255-0"
+            target="_blank"
+            >Springer - Étude 2011 (2)</a
+          >
+        </li>
+      </ul>
+    </div>
+
     <script type="module" src="js/main.js"></script>
+    <script>
+      // Toggle sources menu
+      document
+        .getElementById('sources-toggle')
+        .addEventListener('click', function () {
+          const list = document.getElementById('sources-list');
+          const toggle = document.getElementById('sources-toggle');
+
+          if (list.classList.contains('hidden')) {
+            list.classList.remove('hidden');
+            toggle.textContent = 'Sources ▲';
+          } else {
+            list.classList.add('hidden');
+            toggle.textContent = 'Sources ▼';
+          }
+        });
+    </script>
   </body>
 </html>
